@@ -5,13 +5,29 @@ namespace SystemUnderTest
 {
     public class OrderService
     {
-        public bool PlaceOrder(Order order)
+        private int _orderCount = 0;
+
+        // A void method whose success cannot be verified by its returned result
+        // Verifying thrown exceptions is straightforward, but what about successful execution?
+        public void PlaceOrder(Order order)
         {
-            if(order.Items.Count() > 0)
+            if (order == null) throw new ArgumentNullException(nameof(order));
+
+            if(!order.Items.Any())
             {
-                return true;
+                return;
             }
-            return false;
+
+            SaveOrder(order);
+
+            Utils.SendOrderConfirmationEmail(order);
+
+            _orderCount++;
+        }
+
+        private void SaveOrder(Order order)
+        {
+            throw new Exception("Can't connect to database.");
         }
     }
 }

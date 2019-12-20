@@ -1,9 +1,13 @@
-using System;
 using SystemUnderTest;
 using Xunit;
 
 namespace UnitTests
 {
+
+    /// <summary>
+    /// These tests call a public method and verify its result is what is expected
+    /// They also confirm a side effect in a public property
+    /// </summary>
     public class OrderAddItem
     {
         private Order _order = new Order();
